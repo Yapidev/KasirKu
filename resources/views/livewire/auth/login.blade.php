@@ -16,12 +16,12 @@
                             class="authentication-login min-vh-100 bg-body row justify-content-center align-items-center p-4">
                             <div class="col-sm-8 col-md-6 col-xl-9">
                                 <h2 class="mb-3 fs-7 fw-bolder">Login ke Kasirku 😍</h2>
-                                <form>
+                                <form wire:submit='login'>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
                                         <input name="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" id="email"
-                                            aria-describedby="emailHelp" required>
+                                            aria-describedby="emailHelp" wire:model.blur='email'>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -32,7 +32,7 @@
                                         <label for="password" class="form-label">Password</label>
                                         <input name="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" id="password"
-                                            required>
+                                            wire:model.blur='password'>
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -41,15 +41,15 @@
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <div class="form-check">
-                                            <input class="form-check-input primary" type="checkbox" name="remember"
-                                                id="flexCheckChecked" {{ old('remember') ? 'checked' : '' }}>
-                                            <label class="form-check-label text-dark" for="flexCheckChecked">
+                                            <input class="form-check-input primary" type="checkbox"
+                                                id="flexCheckChecked" wire:model.live='remember_token'>
+                                            <label class="form-check-label text-dark cursor-pointer" for="flexCheckChecked">
                                                 Ingat Saya
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="submit"
-                                        class="btn btn-primary w-100 py-8 mb-4 rounded-2">Masuk</button>
+                                    <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2"
+                                        wire:loading.delay.long.attr='disabled'>Masuk</button>
                                 </form>
                             </div>
                         </div>
